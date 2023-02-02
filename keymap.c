@@ -35,6 +35,10 @@ enum preonic_keycodes {
   TEST,
   BACKLIT,
   PTRDR, // pointer deref
+  CPY,
+  PST,
+  CUT,
+  UNDO
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -81,11 +85,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LCTL, KC_LGUI, KC_LALT, TEST, KC_LSFT,    KC_SPC,  KC_SPC,  RAISE,   LOWER,   KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
+
 /* Lower
  * ,-----------------------------------------------------------------------------------.
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |   ^  |   ?  |   %  |   +  |   !  |      |      |      |      |      |      |      |
+ * |   ^  |   ?  |   %  |   +  |   !  |      |      |      |   <  |   >  |      |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |   #  |   /  |   =  |   -  |   "  |   '  |      |   &  |   |  |   ß  |   ~  |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -96,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT_preonic_grid(
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,     KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-  DE_CIRC, DE_QUES, DE_PERC, DE_PLUS, DE_EXLM, _______, _______, _______, _______,  _______, _______, _______,
+  DE_CIRC, DE_QUES, DE_PERC, DE_PLUS, DE_EXLM, _______, _______, _______, DE_LABK,  DE_RABK, _______, _______,
   DE_HASH, DE_SLSH, DE_EQL,  DE_MINS, DE_DQUO, DE_QUOT, _______, DE_AMPR, DE_PIPE,    DE_SS, DE_TILD, _______,
   _______, DE_BSLS, DE_UNDS, DE_ASTR, DE_GRV,  _______, _______,   DE_AT,  DE_DLR,  DE_EURO, _______, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
@@ -106,24 +111,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define CA_LEFT LCTL(LALT(KC_LEFT))
 #define CA_RIGHT LCTL(LALT(KC_RIGHT))
 
+
 /* Raise
  * ,-----------------------------------------------------------------------------------.
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |   <  |   >  | PTRDR|      |      | Bksp |  Up  |  Del |      |      |
+ * |      |   [  |   {  |   }  |   ]  |      |      | Bksp |  Up  |  Del |      |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |   {  |   (  |   )  |   }  |   ;  | CALE | Left | Down | Right| CARI |      |
+ * |      | CPY  |   (  |   )  |   ;  |      | CALE | Left | Down | Right| CARI |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  ALT |   [  |   ]  |      |      | Pg Up| Home | Pg Dn| End  | Ctrl |      |
+ * |      | PST  | CUT  | UNDO |      |      | Pg Up| Home | Pg Dn| End  | Ctrl |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_preonic_grid(
   KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-  _______,  _______, DE_LABK, DE_RABK,   PTRDR, _______, _______, KC_BSPC, KC_UP,   KC_DEL,  _______, _______,
-  _______,  DE_LCBR, DE_LPRN, DE_RPRN, DE_RCBR, DE_SCLN, CA_LEFT, KC_LEFT, KC_DOWN, KC_RGHT,CA_RIGHT, _______,
-  _______,  KC_LALT, DE_LBRC, DE_RBRC, _______, _______, KC_PGUP, KC_HOME, KC_PGDN, KC_END,  KC_LCTL, _______,
+  _______,  DE_LBRC, DE_LCBR, DE_RCBR, DE_RBRC, _______, _______, KC_BSPC, KC_UP,   KC_DEL,  _______, _______,
+  _______,      CPY, DE_LPRN, DE_RPRN, DE_SCLN, _______, CA_LEFT, KC_LEFT, KC_DOWN, KC_RGHT,CA_RIGHT, _______,
+  _______,      PST,     CUT,    UNDO, _______, _______, KC_PGUP, KC_HOME, KC_PGDN, KC_END,  KC_LCTL, _______,
   _______,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
@@ -175,15 +181,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+        case CPY:
+          if (record->event.pressed) {
+            SEND_STRING(SS_LCTL(SS_TAP(X_C)));
+          }
+          return false;
+          break;
+        case PST:
+          if (record->event.pressed) {
+            SEND_STRING(SS_LCTL(SS_TAP(X_V)));
+          }
+          return false;
+          break;
+        case CUT:
+          if (record->event.pressed) {
+            SEND_STRING(SS_LCTL(SS_TAP(X_X)));
+          }
+          return false;
+          break;
+        case UNDO:
+          if (record->event.pressed) {
+            SEND_STRING(SS_LCTL(SS_TAP(X_Y)));
+          }
+          return false;
+          break;
         case DE_CIRC:
           if (record->event.pressed) {
             register_code(KC_GRV);
-            //SEND_STRING(SS_TAP(X_GRV)SS_TAP(X_SPC));
           } else {
             unregister_code(KC_GRV);
-            register_code(KC_SPC);
-            unregister_code(KC_SPC);
-            //SEND_STRING(SS_TAP(X_GRV)SS_TAP(X_SPC));
+            tap_code(KC_SPC);
           }
           return false;
           break;
@@ -192,8 +219,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             register_code(KC_EQL);
           } else {
             unregister_code(KC_EQL);
-            register_code(KC_SPC);
-            unregister_code(KC_SPC);
+            tap_code(KC_SPC);
           }
           return false;
           break;
