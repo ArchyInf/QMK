@@ -35,6 +35,7 @@ enum preonic_keycodes {
   TEST,
   BACKLIT,
   PTRDR, // pointer deref
+  MYSHIFT,
   CPY,
   PST,
   CUT,
@@ -61,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  DE_UDIA, DE_L,    DE_U,    DE_A,    DE_J,    DE_W,    DE_B,    DE_D,    DE_G,    DE_ADIA, DE_ODIA,
   KC_ESC,  DE_C,    DE_R,    DE_I,    DE_E,    DE_O,    DE_M,    DE_N,    DE_T,    DE_S,    DE_H,    KC_ENT,
   KC_LCTL, DE_V,    DE_X,    DE_Z,    DE_Y,    DE_Q,    DE_P,    DE_F,    DE_COMM, DE_DOT,  DE_K,    QK_LEAD,
-  KC_LCTL, KC_LGUI, KC_LALT, TEST,    KC_LSFT, KC_SPC,  KC_SPC,  RAISE,   LOWER,   _______, KC_DOWN,   KC_UP
+  KC_LCTL, KC_LGUI, KC_LALT, TEST,    MYSHIFT, KC_SPC,  KC_SPC,  RAISE,   LOWER,   _______, KC_DOWN,   KC_UP
 ),
 
  /* QWERTY
@@ -179,8 +180,83 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
+bool is_shift_down = false;
+bool is_raise_down = false;
+bool is_lower_down = false;
+
+void eval_layers(void) {
+    if(is_lower_down && is_raise_down) {
+      layer_on(_ADJUST);
+    } else {
+      layer_off(_ADJUST);
+    }
+
+    if((is_raise_down && is_shift_down) || is_lower_down) {
+      layer_on(_LOWER);
+      layer_off(_RAISE);
+      return;
+    }
+    layer_off(_LOWER);
+
+    if(is_raise_down) {
+      layer_on(_RAISE);
+      return;
+    }
+    layer_off(_RAISE);
+}
+
+void eval_layers_and_shift(void) {
+    eval_layers();
+
+    if (is_shift_down && !layer_state_is(_LOWER)) {
+      register_code(KC_LSFT);
+    } else {
+      unregister_code(KC_LSFT);
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+        case MYSHIFT:
+          is_shift_down = record->event.pressed;
+          eval_layers_and_shift();
+          return false;
+          break;
+
+        case RAISE:
+          is_raise_down = record->event.pressed;
+          eval_layers_and_shift();
+          return false;
+          break;
+
+        case LOWER:
+          is_lower_down = record->event.pressed;
+          eval_layers_and_shift();
+          return false;
+          break;
+
+        case MINE:
+          if (record->event.pressed) {
+            set_single_persistent_default_layer(_MINE);
+          }
+          return false;
+          break;
+        case QWERTY:
+          if (record->event.pressed) {
+            set_single_persistent_default_layer(_QWERTY);
+          }
+          return false;
+          break;
+        case TEST:
+          if (record->event.pressed) {
+            layer_on(_TEST);
+          } else {
+            layer_off(_TEST);
+          }
+          return false;
+          break;
+
+
         case CPY:
           if (record->event.pressed) {
             SEND_STRING(SS_LCTL(SS_TAP(X_C)));
@@ -227,46 +303,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (record->event.pressed) {
             SEND_STRING(SS_TAP(X_SLASH)SS_LSFT(SS_TAP(X_NUBS)));
           }
-          break;
-        case MINE:
-          if (record->event.pressed) {
-            set_single_persistent_default_layer(_MINE);
-          }
-          return false;
-          break;
-        case QWERTY:
-          if (record->event.pressed) {
-            set_single_persistent_default_layer(_QWERTY);
-          }
-          return false;
-          break;
-        case LOWER:
-          if (record->event.pressed) {
-            layer_on(_LOWER);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          } else {
-            layer_off(_LOWER);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          }
-          return false;
-          break;
-        case RAISE:
-          if (record->event.pressed) {
-            layer_on(_RAISE);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          } else {
-            layer_off(_RAISE);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          }
-          return false;
-          break;
-        case TEST:
-          if (record->event.pressed) {
-            layer_on(_TEST);
-          } else {
-            layer_off(_TEST);
-          }
-          return false;
           break;
         case BACKLIT:
           if (record->event.pressed) {
