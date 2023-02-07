@@ -108,9 +108,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 #define CT_COMM LCTL(KC_COMM)
+
+// nav back/forward (intellij)
 #define CA_LEFT LCTL(LALT(KC_LEFT))
 #define CA_RIGHT LCTL(LALT(KC_RIGHT))
 
+// add caret at find result (intellij)
+#define CR_NEXT LALT(KC_J)
+#define CR_ALL LCTL(LALT(LSFT(KC_J)))
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.
@@ -120,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      | CPY  |   (  |   )  |   ;  |      | CALE | Left | Down | Right| CARI |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      | PST  | CUT  | UNDO |      |      | Pg Up| Home | Pg Dn| End  | Ctrl |      |
+ * |      | PST  | CUT  | UNDO |CRNEXT|CR_ALL| Pg Up| Home | Pg Dn| End  | Ctrl |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -129,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
   _______,  DE_LBRC, DE_LCBR, DE_RCBR, DE_RBRC, _______, _______, KC_BSPC, KC_UP,   KC_DEL,  _______, _______,
   _______,      CPY, DE_LPRN, DE_RPRN, DE_SCLN, _______, CA_LEFT, KC_LEFT, KC_DOWN, KC_RGHT,CA_RIGHT, _______,
-  _______,      PST,     CUT,    UNDO, _______, _______, KC_PGUP, KC_HOME, KC_PGDN, KC_END,  KC_LCTL, _______,
+  _______,      PST,     CUT,    UNDO, CR_NEXT,  CR_ALL, KC_PGUP, KC_HOME, KC_PGDN, KC_END,  KC_LCTL, _______,
   _______,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
