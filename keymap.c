@@ -411,6 +411,10 @@ void matrix_scan_user(void) {
     SEQ_ONE_KEY(DE_N) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_N))));
     }
+    // refresh Unity
+    SEQ_ONE_KEY(DE_5) {
+      SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_F5))));
+    }
 
     leader_end();
   }
