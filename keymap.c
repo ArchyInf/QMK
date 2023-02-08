@@ -20,19 +20,21 @@
 
 enum preonic_layers {
   _MINE,
-  _QWERTY,
+  _GAME,
   _LOWER,
   _RAISE,
-  _TEST,
+  _MINE_S,
+  _GAME_S,
   _ADJUST
 };
 
 enum preonic_keycodes {
   MINE = SAFE_RANGE,
-  QWERTY,
+  GAME,
   LOWER,
   RAISE,
-  TEST,
+  MINE_S,
+  GAME_S,
   BACKLIT,
   PTRDR, // pointer deref
   CPY,
@@ -53,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Ctrl |   V  |   X  |   Z  |   Y  |   Q  |   P  |   F  |   ,  |   .  |   K  | LEAD |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | GUI  |  ALT | TEST |Shift |    Space    |Raise | Lower|      | Down |  Up  |
+ * | Ctrl | GUI  |  ALT |MINE_S|Shift |    Space    |Raise | Lower|      | Down |  Up  |
  * `-----------------------------------------------------------------------------------'
  */
 [_MINE] = LAYOUT_preonic_grid(
@@ -61,10 +63,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  DE_UDIA, DE_L,    DE_U,    DE_A,    DE_J,    DE_W,    DE_B,    DE_D,    DE_G,    DE_ADIA, DE_ODIA,
   KC_ESC,  DE_C,    DE_R,    DE_I,    DE_E,    DE_O,    DE_M,    DE_N,    DE_T,    DE_S,    DE_H,    KC_ENT,
   KC_LCTL, DE_V,    DE_X,    DE_Z,    DE_Y,    DE_Q,    DE_P,    DE_F,    DE_COMM, DE_DOT,  DE_K,    QK_LEAD,
-  KC_LCTL, KC_LGUI, KC_LALT, TEST,    KC_LSFT, KC_SPC,  KC_SPC,  RAISE,   LOWER,   _______, KC_DOWN,   KC_UP
+  KC_LCTL, KC_LGUI, KC_LALT, MINE_S,  KC_LSFT, KC_SPC,  KC_SPC,  RAISE,   LOWER,   _______, KC_DOWN,   KC_UP
 ),
 
- /* QWERTY
+ /* GAME
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -74,15 +76,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Y  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |  Up  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | GUI  |  ALT | TEST |Shift |    Space    |Raise |Lower | Left | Down |Right |
+ * | Ctrl | GUI  |  ALT |MINE_S|GAME_S|    Space    |Raise |Lower | Left | Down |Right |
  * `-----------------------------------------------------------------------------------'
 */
-[_QWERTY] = LAYOUT_preonic_grid(
+[_GAME] = LAYOUT_preonic_grid(
   DE_TILD, DE_1,    DE_2,    DE_3,    DE_4,    DE_5,    DE_6,    DE_7,    DE_8,    DE_9,    DE_0,    KC_BSPC,
   KC_TAB,  DE_Q,    DE_W,    DE_E,    DE_R,    DE_T,    DE_Z,    DE_U,    DE_I,    DE_O,    DE_P,    KC_DEL,
   KC_ESC,  DE_A,    DE_S,    DE_D,    DE_F,    DE_G,    DE_H,    DE_J,    DE_K,    DE_L,    _______, KC_ENT,
   KC_LSFT, DE_Y,    DE_X,    DE_C,    DE_V,    DE_B,    DE_N,    DE_M,    KC_COMM, KC_DOT,  KC_UP,   KC_ENT,
-  KC_LCTL, KC_LGUI, KC_LALT, TEST, KC_LSFT,    KC_SPC,  KC_SPC,  RAISE,   LOWER,   KC_LEFT, KC_DOWN, KC_RGHT
+  KC_LCTL, KC_LGUI, KC_LALT, MINE_S,  GAME_S,  KC_SPC,  KC_SPC,  RAISE,   LOWER,   KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
 
@@ -138,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
-/* TEST
+/* MINE_S
  * ,-----------------------------------------------------------------------------------.
  * |      |      |      |      |      |      |      |      |   /  |   *  |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -151,14 +153,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |             |   0  |      |   .  |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_TEST] = LAYOUT_preonic_grid(
+[_MINE_S] = LAYOUT_preonic_grid(
   _______,  _______, _______, _______, _______, _______, _______, _______, DE_SLSH, DE_ASTR, _______, _______,
   DE_CIRC,  KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______,   KC_7,  KC_8,    KC_9,    DE_MINS, KC_BSPC,
-  _______,  KC_F5,    KC_F6,   KC_F7,   KC_F8,  _______, _______,   KC_4,  KC_5,    KC_6,    DE_PLUS, _______,
-  _______,  KC_F1,    KC_F2,   KC_F3,   KC_F4,  _______, KC_PSCR,   KC_1,  KC_2,    KC_3,    _______, _______,
+  _______,  KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______, _______,   KC_4,  KC_5,    KC_6,    DE_PLUS, _______,
+  _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______, KC_PSCR,   KC_1,  KC_2,    KC_3,    _______, _______,
   _______,  _______, _______, _______, _______, _______, _______,   KC_0,  _______, KC_DOT,  _______, _______
 ),
 
+/* GAME_S
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |   ^  |   9  |   0  |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * |      |   5  |   6  |   7  |   8  |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |   1  |   2  |   3  |   4  |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |             |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_GAME_S] = LAYOUT_preonic_grid(
+  _______,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+  DE_CIRC,  KC_9,    KC_0,    _______, _______, _______, _______, _______, _______, _______, _______, _______,
+  _______,  KC_5,    KC_6,    KC_7,    KC_8,    _______, _______, _______, _______, _______, _______, _______,
+  _______,  KC_1,    KC_2,    KC_3,    KC_4,    _______, _______, _______, _______, _______, _______, _______,
+  _______,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+),
 
 /* Adjust (Lower + Raise)
  * ,-----------------------------------------------------------------------------------.
@@ -166,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      | Reset| Debug|      |      |      |      |      |      |      |      |  Del |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |      |Aud cy|Aud on|AudOff|AGnorm|AGswap|MINE  |QWERTY|      |      |      |
+ * |      |      |Aud cy|Aud on|AudOff|AGnorm|AGswap|MINE  | GAME |      |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |Voice-|Voice+|Mus on|MusOff|MidiOn|MidOff|      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -176,9 +198,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_preonic_grid(
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
   _______, QK_BOOT, DB_TOGG, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,
-  _______, _______, MU_NEXT, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP,    MINE,  QWERTY, _______, _______, _______,
+  _______, _______, MU_NEXT, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP,    MINE,    GAME, _______, _______, _______,
   _______, AU_PREV, AU_NEXT, MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______,
-  _______, _______,    TEST, _______, _______, _______, _______, _______, _______, _______, _______, _______
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 )
 
 
@@ -239,9 +261,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
           return false;
           break;
-        case QWERTY:
+        case GAME:
           if (record->event.pressed) {
-            set_single_persistent_default_layer(_QWERTY);
+            set_single_persistent_default_layer(_GAME);
           }
           return false;
           break;
@@ -265,11 +287,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
           return false;
           break;
-        case TEST:
+        case MINE_S:
           if (record->event.pressed) {
-            layer_on(_TEST);
+            layer_on(_MINE_S);
           } else {
-            layer_off(_TEST);
+            layer_off(_MINE_S);
+          }
+          return false;
+          break;
+        case GAME_S:
+          if (record->event.pressed) {
+            layer_on(_GAME_S);
+          } else {
+            layer_off(_GAME_S);
           }
           return false;
           break;
