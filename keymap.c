@@ -444,6 +444,14 @@ void matrix_scan_user(void) {
     // refresh Unity
     SEQ_ONE_KEY(DE_5) {
       SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_F5))));
+    }    
+    // console
+    SEQ_ONE_KEY(DE_A) {
+      SEND_STRING(SS_LALT(SS_TAP(X_F12)));
+    }
+    // clear windows
+    SEQ_ONE_KEY(DE_J) {
+      SEND_STRING(SS_LSFT(SS_LCTL(SS_TAP(X_F12))));
     }
 
     leader_end();
