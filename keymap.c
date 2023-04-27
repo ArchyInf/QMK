@@ -465,7 +465,14 @@ void matrix_scan_user(void) {
     SEQ_ONE_KEY(DE_D) {
       SEND_STRING(SS_LSFT(SS_LCTL(SS_TAP(X_D))));
     }
-
+    // Navigate to
+    SEQ_ONE_KEY(DE_G) {
+      SEND_STRING(SS_LSFT(SS_LCTL(SS_TAP(X_G))));
+    }
+    // analyze stack trace
+    SEQ_ONE_KEY(DE_4) {
+      SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_F4))));
+    }    
     leader_end();
   }
 
