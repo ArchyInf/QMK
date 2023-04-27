@@ -398,10 +398,6 @@ void matrix_scan_user(void) {
       SEND_STRING(SS_LCTL(SS_TAP(X_F8)));
     }
     // goto declaration
-    SEQ_ONE_KEY(DE_D) {
-      SEND_STRING(SS_LCTL(SS_TAP(X_B)));
-    }
-    // goto declaration
     SEQ_ONE_KEY(DE_C) {
       SEND_STRING(SS_LCTL(SS_TAP(X_B)));
     }
@@ -456,6 +452,14 @@ void matrix_scan_user(void) {
     // vcs file history
     SEQ_ONE_KEY(DE_Q) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_Q))));
+    }
+    // convert selection to carets
+    SEQ_ONE_KEY(KC_COMM) {
+      SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_COMM))));
+    }
+    // duplicate line for carets in clipboard
+    SEQ_ONE_KEY(DE_D) {
+      SEND_STRING(SS_LSFT(SS_LCTL(SS_TAP(X_D))));
     }
 
     leader_end();
