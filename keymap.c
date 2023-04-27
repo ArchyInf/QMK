@@ -451,7 +451,7 @@ void matrix_scan_user(void) {
     }
     // vcs file history
     SEQ_ONE_KEY(DE_Q) {
-      SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_Q))));
+      SEND_STRING(SS_LSFT(SS_LCTL(SS_TAP(X_Q))));
     }
     // convert selection to carets
     SEQ_ONE_KEY(KC_COMM) {
