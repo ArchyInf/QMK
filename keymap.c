@@ -457,6 +457,10 @@ void matrix_scan_user(void) {
     SEQ_ONE_KEY(KC_COMM) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_COMM))));
     }
+    // smart keep line carets
+    SEQ_ONE_KEY(KC_DOT) {
+      SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_DOT))));
+    }
     // duplicate line for carets in clipboard
     SEQ_ONE_KEY(DE_D) {
       SEND_STRING(SS_LSFT(SS_LCTL(SS_TAP(X_D))));
