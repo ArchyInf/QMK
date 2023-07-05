@@ -466,10 +466,6 @@ void matrix_scan_user(void) {
     SEQ_ONE_KEY(DE_N) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_N))));
     }
-    // refresh Unity
-    SEQ_ONE_KEY(DE_5) {
-      SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_F5))));
-    }    
     // console
     SEQ_ONE_KEY(DE_A) {
       SEND_STRING(SS_LALT(SS_TAP(X_F12)));
@@ -498,10 +494,18 @@ void matrix_scan_user(void) {
     SEQ_ONE_KEY(DE_G) {
       SEND_STRING(SS_LSFT(SS_LCTL(SS_TAP(X_G))));
     }
+    // minimize/maximize tool window
+    SEQ_ONE_KEY(DE_3) {
+      SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_F3))));
+    }
     // analyze stack trace
     SEQ_ONE_KEY(DE_4) {
       SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_F4))));
-    }    
+    }
+    // refresh Unity
+    SEQ_ONE_KEY(DE_5) {
+      SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_F5))));
+    }
     leader_end();
   }
 
