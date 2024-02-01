@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  DE_UDIA, DE_L,    DE_U,    DE_A,    DE_J,    DE_W,    DE_B,    DE_D,    DE_G,    DE_ADIA, DE_ODIA,
   KC_ESC,  DE_C,    DE_R,    DE_I,    DE_E,    DE_O,    DE_M,    DE_N,    DE_T,    DE_S,    DE_H,    KC_ENT,
   KC_LCTL, DE_V,    DE_X,    DE_Z,    DE_Y,    DE_Q,    DE_P,    DE_F,    DE_COMM, DE_DOT,  DE_K,    QK_LEAD,
-  KC_LCTL, KC_LGUI, KC_LALT, MINE_S,  KC_LSFT, KC_SPC,  KC_SPC,  RAISE,   LOWER,   _______, KC_DOWN,   KC_UP
+  KC_LCTL, KC_LGUI, KC_LALT, MINE_S,  KC_LSFT, KC_LALT, KC_SPC,  RAISE,   LOWER,   _______, KC_DOWN,   KC_UP
 ),
 
  /* Mine - QWERTY
@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  DE_Q,    DE_W,    DE_E,    DE_R,    DE_T,    DE_Y,    DE_U,    DE_I,    DE_O,    DE_P,    DE_UDIA,
   KC_ESC,  DE_A,    DE_S,    DE_D,    DE_F,    DE_G,    DE_H,    DE_J,    DE_K,    DE_L,    DE_ODIA, KC_ENT,
   KC_LCTL, DE_Z,    DE_X,    DE_C,    DE_V,    DE_B,    DE_N,    DE_M,    DE_COMM, DE_DOT,  DE_ADIA, QK_LEAD,
-  KC_LCTL, KC_LGUI, KC_LALT, MINE_S,  KC_LSFT, KC_SPC,  KC_SPC,  RAISE,   LOWER,   _______, KC_DOWN, KC_UP
+  KC_LCTL, KC_LGUI, KC_LALT, MINE_S,  KC_LSFT, KC_LALT, KC_SPC,  RAISE,   LOWER,   _______, KC_DOWN, KC_UP
 ),
 
  /* GAME
