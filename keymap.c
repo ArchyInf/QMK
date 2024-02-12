@@ -37,9 +37,6 @@ enum preonic_keycodes {
   MINE_S,
   GAME_S,
   PTRDR, // pointer deref
-  CPY,
-  PST,
-  CUT,
   UNDO
 };
 
@@ -55,6 +52,10 @@ enum preonic_keycodes {
 
 // Jump To
 #define AL_HOME LCTL(LALT(LSFT(KC_HOME)))
+
+#define CPY LCTL(KC_C)
+#define CUT LCTL(KC_X)
+#define PST LCTL(KC_V)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -233,24 +234,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-        case CPY:
-          if (record->event.pressed) {
-            SEND_STRING(SS_LCTL(SS_TAP(X_C)));
-          }
-          return false;
-          break;
-        case PST:
-          if (record->event.pressed) {
-            SEND_STRING(SS_LCTL(SS_TAP(X_V)));
-          }
-          return false;
-          break;
-        case CUT:
-          if (record->event.pressed) {
-            SEND_STRING(SS_LCTL(SS_TAP(X_X)));
-          }
-          return false;
-          break;
         case UNDO:
           if (record->event.pressed) {
             SEND_STRING(SS_LCTL(SS_TAP(X_Y)));
