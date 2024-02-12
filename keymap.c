@@ -338,108 +338,103 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
+void leader_start_user(void) {
+    // Do something when the leader key is pressed
 }
 
-LEADER_EXTERNS();
-
-void matrix_scan_user(void) {
-  LEADER_DICTIONARY() {
-    leading = false;
-
+void leader_end_user(void) {
     // save
-    SEQ_ONE_KEY(DE_UDIA) {
+    if(leader_sequence_one_key(DE_UDIA)) {
       SEND_STRING(SS_LCTL(SS_TAP(X_S)));
     }
     // usages
-    SEQ_ONE_KEY(DE_U) {
+    if(leader_sequence_one_key(DE_U)) {
       SEND_STRING(SS_LALT(SS_TAP(X_F7)));
     }
     // breakpoint
-    SEQ_ONE_KEY(DE_B) {
+    if(leader_sequence_one_key(DE_B)) {
       SEND_STRING(SS_LCTL(SS_TAP(X_F8)));
     }
     // goto declaration
-    SEQ_ONE_KEY(DE_C) {
+    if(leader_sequence_one_key(DE_C)) {
       SEND_STRING(SS_LCTL(SS_TAP(X_B)));
     }
     // local symbol
-    SEQ_ONE_KEY(DE_I) {
+    if(leader_sequence_one_key(DE_I)) {
       SEND_STRING(SS_LCTL(SS_TAP(X_F12)));
     }
     // symbol
-    SEQ_ONE_KEY(DE_E) {
+    if(leader_sequence_one_key(DE_E)) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(SS_TAP(X_N)))));
     }
     // surround {}
-    SEQ_ONE_KEY(DE_S) {
+    if(leader_sequence_one_key(DE_S)) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_T)))SS_DELAY(50)SS_TAP(X_7)SS_DELAY(50)SS_TAP(X_ENT));
     }
     // find word at carret
-    SEQ_ONE_KEY(DE_F) {
+    if(leader_sequence_one_key(DE_F)) {
       SEND_STRING(SS_LCTL(SS_TAP(X_F3)));
     }
     // select containing declaration & copy
-    SEQ_ONE_KEY(DE_X) {
+    if(leader_sequence_one_key(DE_X)) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(SS_TAP(X_D))))SS_DELAY(10)SS_LCTL(SS_TAP(X_C)));
     }
     // reformat code
-    SEQ_ONE_KEY(DE_L) {
+    if(leader_sequence_one_key(DE_L)) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_L))));
     }
     // rename refactor
-    SEQ_ONE_KEY(DE_R) {
+    if(leader_sequence_one_key(DE_R)) {
       SEND_STRING(SS_LSFT(SS_TAP(X_F6)));
     }
     // introduce variable
-    SEQ_ONE_KEY(DE_V) {
+    if(leader_sequence_one_key(DE_V)) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_V))));
     }
     // inline
-    SEQ_ONE_KEY(DE_N) {
+    if(leader_sequence_one_key(DE_N)) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_N))));
     }
     // console
-    SEQ_ONE_KEY(DE_A) {
+    if(leader_sequence_one_key(DE_A)) {
       SEND_STRING(SS_LALT(SS_TAP(X_F12)));
     }
     // clear windows
-    SEQ_ONE_KEY(DE_J) {
+    if(leader_sequence_one_key(DE_J)) {
       SEND_STRING(SS_LSFT(SS_LCTL(SS_TAP(X_F12))));
     }
     // vcs file history
-    SEQ_ONE_KEY(DE_Q) {
+    if(leader_sequence_one_key(DE_Q)) {
       SEND_STRING(SS_LSFT(SS_LCTL(SS_TAP(X_Q))));
     }
     // convert selection to carets
-    SEQ_ONE_KEY(KC_COMM) {
+    if(leader_sequence_one_key(KC_COMM)) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_COMM))));
     }
     // smart keep line carets
-    SEQ_ONE_KEY(KC_DOT) {
+    if(leader_sequence_one_key(KC_DOT)) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_DOT))));
     }
     // duplicate line for carets in clipboard
-    SEQ_ONE_KEY(DE_D) {
+    if(leader_sequence_one_key(DE_D)) {
       SEND_STRING(SS_LSFT(SS_LCTL(SS_TAP(X_D))));
     }
     // Navigate to
-    SEQ_ONE_KEY(DE_G) {
+    if(leader_sequence_one_key(DE_G)) {
       SEND_STRING(SS_LSFT(SS_LCTL(SS_TAP(X_G))));
     }
     // minimize/maximize tool window
-    SEQ_ONE_KEY(DE_3) {
+    if(leader_sequence_one_key(DE_3)) {
       SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_F3))));
     }
     // analyze stack trace
-    SEQ_ONE_KEY(DE_4) {
+    if(leader_sequence_one_key(DE_4)) {
       SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_F4))));
     }
     // refresh Unity
-    SEQ_ONE_KEY(DE_5) {
+    if(leader_sequence_one_key(DE_5)) {
       SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_F5))));
     }
-    leader_end();
-  }
 }
 
 
