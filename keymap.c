@@ -352,9 +352,9 @@ void leader_end_user(void) {
     if(leader_sequence_one_key(DE_F)) {
       SEND_STRING(SS_LCTL(SS_TAP(X_F3)));
     }
-    // select containing declaration & copy
+    // select containing declaration
     if(leader_sequence_one_key(DE_X)) {
-      SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(SS_TAP(X_D))))SS_DELAY(10)SS_LCTL(SS_TAP(X_C)));
+      SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(SS_TAP(X_D)))));
     }
     // reformat code
     if(leader_sequence_one_key(DE_L)) {
