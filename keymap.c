@@ -321,6 +321,23 @@ void leader_start_user(void) {
 }
 
 void leader_end_user(void) {
+    // navigate to class
+    if(leader_sequence_one_key(DE_R)) {
+      SEND_STRING(SS_LCTL(SS_TAP(X_N)));
+    }
+    // navigate to file
+    if(leader_sequence_one_key(DE_I)) {
+      SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_N))));
+    }
+    // navigate to symbol
+    if(leader_sequence_one_key(DE_E)) {
+      SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(SS_TAP(X_N)))));
+    }
+    // navigate to local symbol; ESC closes navigate to dialog if openf
+    if(leader_sequence_one_key(DE_Y)) {
+      SEND_STRING(SS_TAP(X_ESC)SS_DELAY(10)SS_LCTL(SS_TAP(X_F12)));
+    }
+
     // save
     if(leader_sequence_one_key(DE_UDIA)) {
       SEND_STRING(SS_LCTL(SS_TAP(X_S)));
@@ -336,14 +353,6 @@ void leader_end_user(void) {
     // goto declaration
     if(leader_sequence_one_key(DE_C)) {
       SEND_STRING(SS_LCTL(SS_TAP(X_B)));
-    }
-    // local symbol
-    if(leader_sequence_one_key(DE_I)) {
-      SEND_STRING(SS_LCTL(SS_TAP(X_F12)));
-    }
-    // symbol
-    if(leader_sequence_one_key(DE_E)) {
-      SEND_STRING(SS_LCTL(SS_LALT(SS_LSFT(SS_TAP(X_N)))));
     }
     // surround {}
     if(leader_sequence_one_key(DE_S)) {
