@@ -45,6 +45,19 @@ enum preonic_keycodes {
   UNDO
 };
 
+#define CT_COMM LCTL(KC_COMM)
+
+// nav back/forward (intellij)
+#define CA_LEFT LCTL(LALT(KC_LEFT))
+#define CA_RIGHT LCTL(LALT(KC_RIGHT))
+
+// add caret at find result (intellij)
+#define CR_NEXT LALT(KC_J)
+#define CR_ALL LCTL(LALT(LSFT(KC_J)))
+
+// Jump To
+#define AL_HOME LCTL(LALT(LSFT(KC_HOME)))
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* MINE
@@ -132,18 +145,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
 ),
 
-#define CT_COMM LCTL(KC_COMM)
-
-// nav back/forward (intellij)
-#define CA_LEFT LCTL(LALT(KC_LEFT))
-#define CA_RIGHT LCTL(LALT(KC_RIGHT))
-
-// add caret at find result (intellij)
-#define CR_NEXT LALT(KC_J)
-#define CR_ALL LCTL(LALT(LSFT(KC_J)))
-
-// Jump To
-#define AL_HOME LCTL(LALT(LSFT(KC_HOME)))
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.
