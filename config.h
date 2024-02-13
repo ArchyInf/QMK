@@ -31,6 +31,9 @@
 #define LEADER_TIMEOUT 1
 #define LEADER_PER_KEY_TIMING
 
+// https://docusaurus.qmk.fm/tap_hold
+#define HOLD_ON_OTHER_KEY_PRESS
+
 /*""
  * MIDI options
  */
