@@ -371,7 +371,7 @@ void leader_end_user(void) {
       SEND_STRING(SS_LCTL(SS_LALT(SS_TAP(X_L))));
     }
     // rename refactor
-    if(leader_sequence_one_key(DE_R)) {
+    if(leader_sequence_one_key(DE_Z)) {
       SEND_STRING(SS_LSFT(SS_TAP(X_F6)));
     }
     // introduce variable
